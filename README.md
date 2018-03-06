@@ -1,2 +1,0 @@
-# MiniDomo.github.io
-Website
