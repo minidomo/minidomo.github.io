@@ -53,7 +53,6 @@ function mouseUp(ev) {
 }
 
 function touchStart(e) {
-    alert("touched");
     player.isJumping = true;
 }
 
