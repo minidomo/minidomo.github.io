@@ -1,5 +1,7 @@
 document.onmousedown = mouseDown;
 document.onmouseup = mouseUp;
+document.ontouchstart = mouseDown;
+document.ontouchend = mouseUp;
 
 var player = {
     w: 25,
