@@ -1,7 +1,7 @@
 document.onmousedown = mouseDown;
 document.onmouseup = mouseUp;
-document.ontouchstart = mouseDown;
-document.ontouchend = mouseUp;
+document.ontouchstart = touchStart;
+document.ontouchend = touchEnd;
 
 var player = {
     w: 25,
@@ -49,6 +49,14 @@ function mouseDown(ev) {
 }
 
 function mouseUp(ev) {
+
+}
+
+function touchStart(e) {
+    player.isJumping = true;
+}
+
+function touchEnd(e) {
     player.isJumping = false;
 }
 
