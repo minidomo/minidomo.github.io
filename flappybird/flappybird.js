@@ -9,7 +9,7 @@ var player = {
     x: 220,
     y: 269,
     velY: 0,
-    maxVelY: 6,
+    maxVelY: 8,
     isJumping: false
 };
 
@@ -35,6 +35,7 @@ function playerUpdate() {
     player.y += player.velY;
     if (player.isJumping)
         player.velY = -8;
+    player.y = clamp(player.y, 0, 588 - player.w);
     document.getElementById('bird').style.top = player.y + 'px';
 }
 
@@ -42,6 +43,15 @@ function fall() {
     player.velY += gravity;
     if (player.velY >= player.maxVelY)
         player.velY = player.maxVelY;
+}
+
+function clamp(val, min, max) {
+    if (val >= max)
+        return max;
+    else if (val <= min)
+        return min;
+    else
+        return val;
 }
 
 function mouseDown(ev) {
