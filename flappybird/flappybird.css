@@ -26,6 +26,7 @@ button {
 #wall1, #wall2 {
     width: 320px;
     background-color: lightgray;
+    visibility: hidden;
 }
 
 #screen {
@@ -39,4 +40,6 @@ button {
     height: 25px;
     background-color: lightcoral;
     position: absolute;
+    top: 269px;
+    left: 220px;
 }
