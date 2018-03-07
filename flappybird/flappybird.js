@@ -25,7 +25,7 @@ function update() {
 function reset() {
     player.x = 220;
     player.y = 269;
-    player.velY = 1;
+    player.velY = 0;
     document.getElementById('bird').style.left = player.x + 'px';
     document.getElementById('bird').style.top = player.y + 'px';
 }
