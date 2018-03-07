@@ -49,10 +49,11 @@ function mouseDown(ev) {
 }
 
 function mouseUp(ev) {
-
+    player.isJumping = false;
 }
 
 function touchStart(e) {
+    alert("touched");
     player.isJumping = true;
 }
 
