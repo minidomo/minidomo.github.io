@@ -1,6 +1,6 @@
-# README for flappybird #
+# README for flappybird v2 #
 
-This is the README file for the flappybird app. It's a great place to write
+This is the README file for the flappybird v2 app. It's a great place to write
 down some notes about how your app works. For starters, here is some information
 about the other files in this folder.
 

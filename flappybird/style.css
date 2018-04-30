@@ -181,37 +181,9 @@
   top: 0px;
 }
 
-#divApplab.appModern #mainBackground {
-  width: 320px;
-  height: 450px;
-}
-
-#divApplab.appModern #playBut {
-  background-color: rgb(59, 148, 153);
-  top: 380px;
-  left: 120px;
-}
-
-#divApplab.appModern #image3 {
-  top: 175px;
-  width: 150px;
-  height: 47px;
-  left: 85px;
-}
-
-#divApplab.appModern #label3 {
-  color: rgb(255, 255, 255);
-  width: 128px;
-  top: 330px;
-  height: 50px;
-  text-align: center;
-  left: 96px;
-}
-
 #divApplab.appModern #game {
-  background-size: 320px 450px;
   background-image: url("https://studio.code.org/blockly/media/1x1.gif");
-  display: none;
+  background-size: 320px 450px;
 }
 
 #divApplab.appModern #backDay {
@@ -220,113 +192,116 @@
 }
 
 #divApplab.appModern #backNight {
-  height: 375px;
   width: 320px;
+  height: 375px;
 }
 
 #divApplab.appModern #topPipe {
-  height: 324px;
-  width: 72px;
-  top: -285px;
   left: 392px;
+  top: -285px;
+  width: 72px;
+  height: 324px;
 }
 
 #divApplab.appModern #bot2Pipe {
-  height: 324px;
-  width: 72px;
-  top: 265px;
   left: 618px;
+  top: 265px;
+  width: 72px;
+  height: 324px;
 }
 
 #divApplab.appModern #botPipe {
-  height: 324px;
-  width: 72px;
-  top: 335px;
   left: 392px;
+  top: 335px;
+  width: 72px;
+  height: 324px;
 }
 
 #divApplab.appModern #top2Pipe {
-  width: 72px;
-  top: -80px;
   left: 618px;
+  top: -80px;
+  width: 72px;
   height: 324px;
 }
 
 #divApplab.appModern #bird {
-  top: 200px;
-  height: 25px;
-  width: 36px;
   left: 50px;
+  top: 200px;
+  width: 36px;
+  height: 25px;
 }
 
 #divApplab.appModern #floor {
-  height: 112px;
-  width: 320px;
   top: 375px;
+  width: 320px;
+  height: 112px;
 }
 
 #divApplab.appModern #floorBar {
-  height: 20px;
-  width: 620px;
   top: 375px;
+  width: 620px;
+  height: 20px;
 }
 
 #divApplab.appModern #gameOver {
-  height: 72px;
-  width: 272px;
   left: 28px;
   top: 80px;
+  width: 272px;
+  height: 72px;
 }
 
 #divApplab.appModern #displayScore {
-  font-size: 30px;
-  color: rgb(255, 255, 255);
-  height: 35px;
   left: 147px;
-  width: 26px;
   top: 30px;
+  width: 26px;
+  height: 35px;
   text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  overflow-wrap: break-word;
 }
 
 #divApplab.appModern #scorePanel {
-  width: 272px;
   left: 25px;
-  height: 136px;
   top: 160px;
+  width: 272px;
+  height: 136px;
 }
 
 #divApplab.appModern #playAgainBut {
-  height: 64px;
-  width: 116px;
   left: 35px;
   top: 305px;
+  width: 116px;
+  height: 64px;
 }
 
 #divApplab.appModern #scorePanelScore {
-  font-size: 16px;
-  color: rgb(0, 0, 0);
+  left: 250px;
+  top: 200px;
   width: 16px;
   height: 21px;
-  top: 200px;
   text-align: right;
-  left: 250px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  overflow-wrap: break-word;
 }
 
 #divApplab.appModern #scorePanelBest {
-  font-size: 16px;
-  color: rgb(0, 0, 0);
-  width: 16px;
-  height: 21px;
   left: 250px;
   top: 250px;
+  width: 16px;
+  height: 21px;
   text-align: right;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  overflow-wrap: break-word;
 }
 
 #divApplab.appModern #quitBut {
-  height: 64px;
-  width: 116px;
   left: 171px;
   top: 305px;
+  width: 116px;
+  height: 64px;
 }
 
 #divApplab.appModern #endGame {
@@ -334,64 +309,39 @@
 }
 
 #divApplab.appModern #endGameBackground {
-  height: 450px;
   width: 320px;
+  height: 450px;
 }
 
-#divApplab.appModern #button1 {
-  left: 120px;
+#divApplab.appModern #endPlayAgain {
+  left: 110px;
   top: 410px;
+  width: 100px;
 }
 
 #divApplab.appModern #label1 {
-  font-size: 40px;
-  color: rgb(255, 255, 255);
+  top: 10px;
   width: 320px;
   height: 85px;
-  top: 10px;
   text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  overflow-wrap: break-word;
 }
 
 #divApplab.appModern #label4 {
-  color: rgb(255, 255, 255);
-  height: 45px;
   left: 95px;
   top: 130px;
-  font-size: 20px;
-  text-align: center;
   width: 130px;
-}
-
-#divApplab.appModern #attempLab {
+  height: 45px;
+  text-align: center;
   color: rgb(255, 255, 255);
-  width: 63px;
-  left: 85px;
-  top: 180px;
-  text-align: center;
+  font-size: 20px;
+  overflow-wrap: break-word;
 }
 
-#divApplab.appModern #scoreLab {
-  color: rgb(255, 255, 255);
-  width: 44px;
-  left: 185px;
-  top: 180px;
-  text-align: center;
-}
-
-#divApplab.appModern #allAttemps {
-  color: rgb(0, 0, 0);
-  width: 38px;
-  left: 100px;
-  top: 205px;
-  height: 200px;
-  text-align: center;
-}
-
-#divApplab.appModern #allScores {
-  color: rgb(0, 0, 0);
-  height: 200px;
-  left: 190px;
-  top: 205px;
-  width: 38px;
-  text-align: center;
+#divApplab.appModern #resetVals {
+  width: 100px;
+  left: 110px;
+  top: 375px;
 }

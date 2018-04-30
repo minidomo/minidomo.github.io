@@ -1,382 +1,305 @@
-var player = { x: 50, y: 200, velY: 0, width: 36, height: 25, maxVelY: 8 };
-var barObj = { x: 0, y: 375, velX: 2 };
-var gameOverSign = { x: 28, y: 450, velY: 0 };
-var bPipe = { x: 392, y: randomNumber(159, 335), width: 72, height: 324, velX: 2 };
-var tPipe = { x: 392, y: bPipe.y - 444, width: 72, height: 324, velX: 2 };
-var b2Pipe = { x: 618, y: randomNumber(159, 335), width: 72, height: 324, velX: 2 };
-var t2Pipe = { x: 618, y: b2Pipe.y - 444, width: 72, height: 324, velX: 2 };
-var scorePos = { x: 147, y: 30, width: 26 };
-var scorePanelSign = { x: 24, y: 450, velY: 0 };
+setStyle("game", "font-family: Consolas;");
+setStyle("endGame", "font-family: Consolas;");
+setStyle("endPlayAgain", "font-family: Consolas;");
+setStyle("resetVals", "font-family:Consolas;");
+if (randomNumber(0, 1) === 0) {
+    hideElement("backNight");
+    showElement("backDay");
+} else {
+    hideElement("backDay");
+    showElement("backNight");
+}
+var loop;
+var first;
+var second;
+var bird;
+var land;
+var gameover;
+var alive = true;
+var firstTime = true;
 var score = 0;
-var isJumping;
-var gravity = 0.5;
-var isDead;
-var deadSound = 0;
-var jumpSound = 0;
-var bestScore = 0;
-var scoreCount = 0;
-var isRunning;
-var round = 0;
-var scores = [];
-var countScores = 0;
+var best = 0;
 
 function update() {
-    toStop();
-    bird();
-    dead();
-    checkPass();
-    checkCol();
-    bar();
-    movePipes();
-    moveScorePanel();
-    moveGameOver();
-    makeScore();
-}
-
-// objects
-function bird() {
-    fall();
-    player.y += player.velY;
-    player.y = clamp(player.y, 0, 375 - player.height);
-    if (isJumping) {
-        player.velY = -6;
+    first.move();
+    second.move();
+    bird.move();
+    land.move();
+    bird.pass();
+    bird.collide();
+    if (!alive) {
+        gameover.animate();
     }
-    setPosition("bird", player.x, player.y);
-}
-
-function bar() {
-    barObj.x -= barObj.velX;
-    if (barObj.x <= -47) barObj.x = 0;
-    if (isDead) barObj.velX = 0;
-    setPosition("floorBar", barObj.x, barObj.y);
-}
-
-function moveGameOver() {
-    if (isDead) {
-        showElement("gameOver");
-        gameOverSign.y = clamp(gameOverSign.y, 80 + gameOverSign.velY, 450);
-        gameOverSign.y -= gameOverSign.velY;
-        setPosition("gameOver", gameOverSign.x, gameOverSign.y);
-    }
-}
-
-function moveScorePanel() {
-    if (gameOverSign.y === 80) {
-        showElement("scorePanel");
-        scorePanelSign.y = clamp(scorePanelSign.y, 160 + scorePanelSign.velY, 450);
-        scorePanelSign.y -= scorePanelSign.velY;
-        setPosition("scorePanel", scorePanelSign.x, scorePanelSign.y);
-        if (scorePanelSign.y === 160) {
-            showElement("playAgainBut");
-            showElement("quitBut");
-        }
-    }
-}
-
-function makeScore() {
-    if (!isDead) {
-        if (score < 10) {
-            setPosition("displayScore", 147, scorePos.y);
-            setProperty("displayScore", "width", 26);
-        } else if (score > 9 && score < 100) {
-            setPosition("displayScore", 136, scorePos.y);
-            setProperty("displayScore", "width", 48);
-        } else if (score > 99) {
-            setPosition("displayScore", 128, scorePos.y);
-            setProperty("displayScore", "width", 64);
-        }
-        setText("displayScore", score);
-    } else {
-        hideElement("displayScore");
-        setStyle("scorePanelScore", "font-family: monospace;");
-        setStyle("scorePanelBest", "font-family: monospace;");
-        if (scorePanelSign.y === 160) {
-            showElement("scorePanelScore");
-            showElement("scorePanelBest");
-            if (score < 10) {
-                setPosition("scorePanelScore", 250, 200);
-                setProperty("scorePanelScore", "width", 16);
-            } else if (score > 9 && score < 100) {
-                setPosition("scorePanelScore", 238, 200);
-                setProperty("scorePanelScore", "width", 28);
-            } else if (score > 99) {
-                setPosition("scorePanelScore", 227, 200);
-                setProperty("scorePanelScore", "width", 39);
-            }
-            setText("scorePanelScore", score);
-            if (score > bestScore) bestScore = score;
-            if (bestScore < 10) {
-                setPosition("scorePanelBest", 250, 250);
-                setProperty("scorePanelBest", "width", 16);
-            } else if (bestScore > 9 && bestScore < 100) {
-                setPosition("scorePanelBest", 238, 250);
-                setProperty("scorePanelBest", "width", 28);
-            } else if (bestScore > 99) {
-                setPosition("scorePanelBest", 227, 250);
-                setProperty("scorePanelBest", "width", 39);
-            }
-            setText("scorePanelBest", bestScore);
-        }
-    }
-}
-
-function movePipes() {
-    var num = randomNumber(159, 335);
-    if (isDead) {
-        tPipe.velX = 0;
-        bPipe.velX = 0;
-        t2Pipe.velX = 0;
-        b2Pipe.velX = 0;
-    }
-    if (tPipe.x <= -72 && bPipe.x <= -72) {
-        tPipe.x = 392;
-        bPipe.x = 392;
-        bPipe.y = num;
-        tPipe.y = bPipe.y - 444;
-    }
-    if (t2Pipe.x <= -72 && b2Pipe.x <= -72) {
-        t2Pipe.x = 392;
-        b2Pipe.x = 392;
-        b2Pipe.y = num;
-        t2Pipe.y = b2Pipe.y - 444;
-    }
-    tPipe.x -= tPipe.velX;
-    bPipe.x -= bPipe.velX;
-    t2Pipe.x -= t2Pipe.velX;
-    b2Pipe.x -= b2Pipe.velX;
-
-    setPosition("topPipe", tPipe.x, tPipe.y);
-    setPosition("botPipe", bPipe.x, bPipe.y);
-    setPosition("top2Pipe", t2Pipe.x, t2Pipe.y);
-    setPosition("bot2Pipe", b2Pipe.x, b2Pipe.y);
-}
-
-// other functions
-function fall() {
-    player.velY += gravity;
-    if (player.velY > player.maxVelY) player.velY = player.maxVelY;
-}
-
-function dead() {
-    if (player.y === 375 - player.height) {
-        isDead = true;
-        if (deadSound === 0) {
-            playSound("assets/flappyBirdDie.mp3", false);
-            deadSound++;
-        }
-    }
-}
-
-function checkPass() {
-    if (!isDead) {
-        if (player.x + player.width === tPipe.x + 36 || player.x + player.width === t2Pipe.x + 36) {
-            score++;
-            playSound("assets/flappyBirdScore.mp3");
-        }
-    }
-}
-
-function checkCol() {
-    if (player.x < bPipe.x + bPipe.width &&
-        player.x + player.width > bPipe.x &&
-        player.y < bPipe.y + bPipe.height &&
-        player.height + player.y > bPipe.y) {
-        isDead = true;
-        if (deadSound === 0) {
-            playSound("flappyBirdDie.mp3", false);
-            deadSound++;
-        }
-    }
-    else if (player.x < tPipe.x + tPipe.width &&
-        player.x + player.width > tPipe.x &&
-        player.y < tPipe.y + tPipe.height &&
-        player.height + player.y > tPipe.y) {
-        isDead = true;
-        if (deadSound === 0) {
-            playSound("flappyBirdDie.mp3", false);
-            deadSound++;
-        }
-    }
-    else if (player.x < b2Pipe.x + b2Pipe.width &&
-        player.x + player.width > b2Pipe.x &&
-        player.y < b2Pipe.y + b2Pipe.height &&
-        player.height + player.y > b2Pipe.y) {
-        isDead = true;
-        if (deadSound === 0) {
-            playSound("flappyBirdDie.mp3", false);
-            deadSound++;
-        }
-    }
-    else if (player.x < t2Pipe.x + t2Pipe.width &&
-        player.x + player.width > t2Pipe.x &&
-        player.y < t2Pipe.y + t2Pipe.height &&
-        player.height + player.y > t2Pipe.y) {
-        isDead = true;
-        if (deadSound === 0) {
-            playSound("flappyBirdDie.mp3", false);
-            deadSound++;
-        }
-    }
-}
-
-function clamp(val, min, max) {
-    if (val >= max)
-        return max;
-    else if (val <= min)
-        return min;
-    else
-        return val;
-}
-
-function toStop() {
-    if (!isRunning) stopTimedLoop();
 }
 
 function reset() {
-    player.y = 200;
-    player.velY = 0;
-    isJumping = false;
-    isDead = false;
-    barObj.x = 0;
-    barObj.velX = 2;
-    gameOverSign.y = 450;
-    gameOverSign.velY = 37;
-    tPipe.velX = 2;
-    bPipe.velX = 2;
-    tPipe.x = 392;
-    bPipe.x = 392;
-    t2Pipe.velX = 2;
-    b2Pipe.velX = 2;
-    t2Pipe.x = 618;
-    b2Pipe.x = 618;
-    score = 0;
-    deadSound = 0;
-    scorePos.x = 147;
-    scorePos.width = 26;
-    stopSound("flappyBirdDie.mp3");
-    if (randomNumber(0, 1) === 0) {
-        hideElement("backDay");
-        showElement("backNight");
-    } else {
-        hideElement("backNight");
-        showElement("backDay");
+    if (!firstTime) {
+        if (randomNumber(0, 1) === 0) {
+            hideElement("backNight");
+            showElement("backDay");
+        } else {
+            hideElement("backDay");
+            showElement("backNight");
+        }
     }
-    scorePanelSign.y = 450;
-    scorePanelSign.velY = 29;
-    hideElement("playAgainBut");
-    hideElement("gameOver");
-    hideElement("scorePanel");
-    hideElement("scorePanelScore");
-    hideElement("scorePanelBest");
-    showElement("displayScore");
-    scoreCount = 0;
-    hideElement("quitBut");
-    countScores = 0;
+    loop = setInterval(update, 17);
+    first = new pipes(392, randomNumber(159, 335), "botPipe", "topPipe");
+    second = new pipes(618, randomNumber(159, 335), "bot2Pipe", "top2Pipe");
+    bird = new birdObj("bird");
+    land = new landObj("floorBar");
+    alive = true;
+    score = 0;
+    setText("displayScore", score);
 }
 
-// event handlers
-onEvent("playBut", "click", function () {
-    setScreen("game");
-    setStyle("game", "font-family: monospace;");
-    isRunning = true;
-    reset();
-    timedLoop(17, update);
-});
+function landObj(idname) {
+    var x = 0;
+    var y = 375;
+    var id = idname;
+    this.velX = -2;
 
-onEvent("game", "keydown", function (event) {
-    if (!isDead) {
-        if (event.key == " " || event.key == "Up") {
-            isJumping = true;
-            stopSound("assets/flappyBirdJump.mp3");
-            if (jumpSound === 0) {
-                playSound("flappyBirdJump.mp3", false);
-                jumpSound++;
+    this.move = function () {
+        if (alive) {
+            x += this.velX;
+            if (x <= -47) // length of 1 block
+                x = 0;
+            setPosition(id, x, y);
+        }
+    };
+}
+
+function gameoverObj(idname, idname2, idname3, idname4, idname5, idname6) {
+    var x = 28;
+    var y = 450;
+    var velY = 37;
+    var x1 = 24;
+    var y1 = 450;
+    var velY1 = 29;
+
+    setPosition(idname, x, y);
+    setPosition(idname2, x1, y1);
+    showElement(idname);
+    showElement(idname2);
+
+    this.animate = function () {
+        if (y !== 80)
+            moveGameover();
+        if (y === 80 && y1 !== 160)
+            moveScorepanel();
+        if (y1 === 160) {
+            showElement(idname5);
+            showElement(idname6);
+            if (score > best)
+                best = score;
+            format(idname3, 200, score);
+            format(idname4, 250, best);
+            showElement(idname3);
+            showElement(idname4);
+            if (bird.onFloor())
+                clearInterval(loop);
+        }
+    };
+
+    this.hide = function () {
+        hideElement(idname);
+        hideElement(idname2);
+        hideElement(idname3);
+        hideElement(idname4);
+        hideElement(idname5);
+        hideElement(idname6);
+    };
+
+    function moveGameover() {
+        y -= velY;
+        if (y < 80)
+            y = 80;
+        setPosition(idname, x, y);
+    }
+
+    function moveScorepanel() {
+        y1 -= velY1;
+        if (y1 < 160)
+            y1 = 160;
+        setPosition(idname2, x1, y1);
+    }
+
+    function format(id, y, num) {
+        if (num < 10) {
+            setPosition(id, 250, y);
+            setProperty(id, "width", 16);
+        } else if (num > 9 && num < 100) {
+            setPosition(id, 238, y);
+            setProperty(id, "width", 28);
+        } else if (num > 99) {
+            setPosition(id, 227, y);
+            setProperty(id, "width", 39);
+        }
+        setText(id, num);
+    }
+}
+
+function birdObj(idname) {
+    var id = idname;
+    var x = 50;
+    var y = 200;
+    this.velY = 0;
+    var maxVelY = 8;
+    var width = 36;
+    var height = 25;
+    var gravity = 0.5;
+    this.jump = false;
+
+    this.move = function () {
+        this.velY = fall(this.velY);
+        y += this.velY;
+        y = clamp(y, 0, 375 - height); // height of the platform
+        if (this.jump && alive)
+            this.velY = -6;
+        setPosition(id, x, y);
+    };
+
+    this.pass = function () {
+        if (alive) {
+            var val = x + width;
+            if (val === first.x + (first.width / 2) || val === second.x + (second.width / 2)) {
+                setText("displayScore", ++score);
+                format();
+                playSound("assets/flappyBirdScore.mp3");
             }
         }
-        // console.log("Jumping");
-    } else {
-        // console.log("You are dead");
-        if (event.key == "d" || event.key == "Left") {
-            scores.push(score);
-            reset();
-            round++;
+    };
+
+    this.collide = function () {
+        if (alive) {
+            if (collide(first.x, first.y, first.width, first.height) || collide(second.x, second.y, second.width, second.height) ||
+                collide(first.x, first.y2, first.width, first.height) || collide(second.x, second.y2, second.width, second.height)) {
+                alive = false;
+            }
+            if (y === 375 - height) // touches ground
+                alive = false;
+            if (!alive) {
+                playSound("assets/flappyBirdDie.mp3");
+                gameover = new gameoverObj("gameOver", "scorePanel", "scorePanelScore", "scorePanelBest", "playAgainBut", "quitBut");
+            }
         }
+    };
+
+    this.onFloor = function () {
+        return y === 375 - height;
+    };
+
+    function format() {
+        if (score < 10) {
+            setPosition("displayScore", 147, 30);
+            setProperty("displayScore", "width", 26);
+        } else if (score > 9 && score < 100) {
+            setPosition("displayScore", 136, 30);
+            setProperty("displayScore", "width", 48);
+        } else if (score > 99) {
+            setPosition("displayScore", 128, 30);
+            setProperty("displayScore", "width", 64);
+        }
+    }
+
+    function collide(x1, y1, w1, h1) {
+        return x < x1 + w1 && x + width > x1 && y < y1 + h1 && y + height > y1;
+    }
+
+    function fall(velY) {
+        velY += gravity;
+        if (this.velY >= maxVelY)
+            this.velY = maxVelY;
+        return velY;
+    }
+
+    function clamp(val, min, max) {
+        if (val >= max)
+            return max;
+        else if (val <= min)
+            return min;
+        else
+            return val;
+    }
+}
+
+function pipes(xval, yval, idname, idname2) {
+    this.x = xval;
+    this.y = yval;
+    var id = idname;
+    var id2 = idname2;
+    this.y2 = this.y - 444;
+
+    // constants
+    this.width = 72;
+    this.height = 324;
+    var vel = 2;
+
+    this.move = function () {
+        if (alive) {
+            if (this.x <= -this.width) {
+                this.x = 392;
+                this.y = randomNumber(159, 335);
+                this.y2 = this.y - 444;
+            }
+            this.x -= vel;
+            setPosition(id, this.x, this.y);
+            setPosition(id2, this.x, this.y2);
+        }
+    };
+}
+
+onEvent("game", "keydown", function (event) {
+    var key = event.key;
+    if ((key === " " || key === "w" || key === "Up") && alive) {
+        if (firstTime) {
+            reset();
+            showElement("displayScore");
+            firstTime = false;
+        }
+        if (!bird.jump) {
+            stopSound("assets/flappyBirdJump.mp3");
+            playSound("flappyBirdJump.mp3");
+            bird.jump = true;
+        }
+    }
+
+    // play again
+    if (key === "d" && !alive) {
+        gameover.hide();
+        reset();
+    }
+
+    // quit
+    if (key === "f" && !alive) {
+        setScreen("endGame");
+        gameover.hide();
     }
 });
 
 onEvent("game", "keyup", function (event) {
-    if (event.key == " " || event.key == "Up") {
-        isJumping = false;
-        jumpSound = 0;
+    var key = event.key;
+    if (key === " " || key === "w" || key === "Up") {
+        bird.jump = false;
     }
 });
 
 onEvent("playAgainBut", "click", function () {
-    scores.push(score);
+    gameover.hide();
     reset();
-    round++;
 });
 
 onEvent("quitBut", "click", function () {
-    isRunning = false;
     setScreen("endGame");
-    setStyle("endGame", "font-family: monospace;");
-    setStyle("button1", "font-family: monospace;");
-    round++;
-    scores.push(score);
-    var attemps = "";
-    var scoreString = "";
-    for (var s = 0; s < round; s++) {
-        attemps += (s + 1) + "\n";
-        scoreString += scores[s] === undefined ? -1 + "\n" : scores[s] + "\n";
-    }
-    setText("allAttemps", attemps);
-    setText("allScores", scoreString);
+    gameover.hide();
 });
 
-onEvent("button1", "click", function () {
-    setScreen("menu");
-    round = 0;
-    while (0 < scores.length) scores.shift();
-    bestScore = 0;
+onEvent("resetVals", "click", function () {
+    setScreen("game");
+    best = 0;
+    reset();
 });
 
-onEvent("label4", "mouseover", function () {
-    showElement("attempLab");
-    showElement("scoreLab");
-    showElement("allAttemps");
-    showElement("allScores");
+onEvent("endPlayAgain", "click", function () {
+    setScreen("game");
+    reset();
 });
-onEvent("label4", "mouseout", function () {
-    hideElement("attempLab");
-    hideElement("scoreLab");
-    hideElement("allAttemps");
-    hideElement("allScores");
-});
-
-onEvent("game", "mousedown", function () {
-    if (!isDead) {
-        isJumping = true;
-        stopSound("flappyBirdJump.mp3");
-        if (jumpSound === 0) {
-            playSound("flappyBirdJump.mp3", false);
-            jumpSound++;
-        }
-        // console.log("Jumping");
-    }
-});
-
-onEvent("game", "mouseup", function () {
-    isJumping = false;
-    jumpSound = 0;
-});
-
-// extra
-setStyle("menu", "font-family: monospace;");
-setStyle("playBut", "font-family: monospace;");
-setStyle("mobBut", "font-family: monospace;");
-setStyle("label3", "font-weight: bold;");
-setStyle("label2", "font-weight: bold;");
-setStyle("label5", "font-weight: bold;");
-setStyle("playBut", "font-weight: bold;");
-setStyle("mobBut", "font-weight: bold;");
