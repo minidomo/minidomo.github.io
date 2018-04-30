@@ -1,16 +1,52 @@
 <html>
-  <head>
-    <title>Flappy Bird</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-    <script src="applab/applab-api.js"></script>
-    <link rel="stylesheet" href="applab/applab.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" type="image/png" href="assets/flappyBird.png"/>
-  </head>
-  <body>
-    <div id="divApplab" class="appModern running" tabindex="1" style="width: 320px; height: 450px; display: block; margin: auto;"><div class="screen" tabindex="1" id="menu"><img src="assets/editedFlappyBirdWallpaper.png" data-canonical-image-url="assets/editedFlappyBirdWallpaper.png" data-object-fit="contain" id="mainBackground"><button id="playBut">Start</button><img src="assets/flappyBirdSignature.png" data-canonical-image-url="assets/flappyBirdSignature.png" data-object-fit="contain" id="image3"><label id="label3">Press Spacebar or Mouse Click to jump</label></div><div class="screen" tabindex="1" id="game" data-canonical-image-url=""><img src="assets/editedFlappyBirdBackground.png" data-canonical-image-url="assets/editedFlappyBirdBackground.png" data-object-fit="contain" id="backDay"><img src="assets/editedFlappyBirdBackgroundNight.png" data-canonical-image-url="assets/editedFlappyBirdBackgroundNight.png" data-object-fit="contain" id="backNight"><img src="assets/marioPipe2.png" data-canonical-image-url="assets/marioPipe2.png" data-object-fit="contain" id="topPipe"><img src="assets/marioPipe.png" data-canonical-image-url="assets/marioPipe.png" data-object-fit="contain" id="bot2Pipe"><img src="/v3/assets/WLlVqB6Wbdh08dt7B6Rd2nO6N5gqTyuuds6qH4bDSD8/marioPipe.png" data-canonical-image-url="marioPipe.png" data-object-fit="contain" id="botPipe"><img src="/v3/assets/WLlVqB6Wbdh08dt7B6Rd2nO6N5gqTyuuds6qH4bDSD8/marioPipe2.png" data-canonical-image-url="marioPipe2.png" data-object-fit="contain" id="top2Pipe"><img src="assets/flappyBird.png" data-canonical-image-url="assets/flappyBird.png" data-object-fit="contain" id="bird"><img src="assets/flappyBirdFloor.png" data-canonical-image-url="assets/flappyBirdFloor.png" data-object-fit="contain" id="floor"><img src="assets/flappyBirdFloorBar.png" data-canonical-image-url="assets/flappyBirdFloorBar.png" data-object-fit="contain" id="floorBar"><img src="assets/flappyBirdGameOver.png" data-canonical-image-url="assets/flappyBirdGameOver.png" data-object-fit="contain" id="gameOver"><label id="displayScore">0</label><img src="assets/editedFlappyBirdScorePanel.png" data-canonical-image-url="assets/editedFlappyBirdScorePanel.png" data-object-fit="contain" id="scorePanel"><img src="assets/flappyBirdPlayButton.png" data-canonical-image-url="assets/flappyBirdPlayButton.png" data-object-fit="contain" id="playAgainBut" class="design-mode-hidden"><label id="scorePanelScore">0</label><label id="scorePanelBest">0</label><img src="assets/flappyBirdQuitButton.png" data-canonical-image-url="assets/flappyBirdQuitButton.png" data-object-fit="contain" id="quitBut" class="design-mode-hidden"></div><div class="screen" tabindex="1" id="endGame"><img src="assets/editedFlappyBirdBackgroundDay2.png" data-canonical-image-url="assets/editedFlappyBirdBackgroundDay2.png" data-object-fit="contain" id="endGameBackground"><button id="button1">Menu</button><label id="label1">Thanks for Playing</label><label id="label4">Hover to see scores</label><label id="attempLab" class="design-mode-hidden">Attempt</label><label id="scoreLab" class="design-mode-hidden">Score</label><label id="allAttemps" class="design-mode-hidden">000</label><label id="allScores" class="design-mode-hidden">000</label></div></div>
-    <script src="code.js"></script>
-  </body>
+
+<head>
+  <title>Flappy Bird</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script src="applab/applab-api.js"></script>
+  <link rel="stylesheet" href="applab/applab.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/png" href="assets/flappyBird.png" />
+</head>
+
+<body>
+  <div id="divApplab" class="appModern running" tabindex="1" style="width: 320px; height: 450px; display: block; margin:auto;">
+    <div tabindex="1" class="screen" id="game" data-canonical-image-url="">
+      <img id="backDay" src="assets/editedFlappyBirdBackground.png" data-canonical-image-url="assets/editedFlappyBirdBackground.png"
+        data-object-fit="contain">
+      <img id="backNight" src="assets/editedFlappyBirdBackgroundNight.png" data-canonical-image-url="assets/editedFlappyBirdBackgroundNight.png"
+        data-object-fit="contain">
+      <img id="topPipe" src="assets/marioPipe2.png" data-canonical-image-url="assets/marioPipe2.png" data-object-fit="contain">
+      <img id="bot2Pipe" src="assets/marioPipe - Copy.png" data-canonical-image-url="assets/marioPipe - Copy.png" data-object-fit="contain">
+      <img id="botPipe" src="assets/marioPipe.png" data-canonical-image-url="assets/marioPipe.png" data-object-fit="contain">
+      <img id="top2Pipe" src="assets/marioPipe2 - Copy.png" data-canonical-image-url="assets/marioPipe2 - Copy.png" data-object-fit="contain">
+      <img id="bird" src="assets/flappyBird.png" data-canonical-image-url="assets/flappyBird.png" data-object-fit="contain">
+      <img id="floor" src="assets/flappyBirdFloor.png" data-canonical-image-url="assets/flappyBirdFloor.png" data-object-fit="contain">
+      <img id="floorBar" src="assets/flappyBirdFloorBar.png" data-canonical-image-url="assets/flappyBirdFloorBar.png" data-object-fit="contain">
+      <img id="gameOver" src="assets/flappyBirdGameOver.png" data-canonical-image-url="assets/flappyBirdGameOver.png" data-object-fit="contain"
+        class="design-mode-hidden">
+      <label id="displayScore" class="design-mode-hidden">0</label>
+      <img class="design-mode-hidden" id="scorePanel" src="assets/editedFlappyBirdScorePanel.png" data-canonical-image-url="assets/editedFlappyBirdScorePanel.png"
+        data-object-fit="contain">
+      <img class="design-mode-hidden" id="playAgainBut" src="assets/flappyBirdPlayButton.png" data-canonical-image-url="assets/flappyBirdPlayButton.png"
+        data-object-fit="contain">
+      <label id="scorePanelScore" class="design-mode-hidden">0</label>
+      <label id="scorePanelBest" class="design-mode-hidden">0</label>
+      <img class="design-mode-hidden" id="quitBut" src="assets/flappyBirdQuitButton.png" data-canonical-image-url="assets/flappyBirdQuitButton.png"
+        data-object-fit="contain">
+    </div>
+    <div tabindex="1" class="screen" id="endGame">
+      <img id="endGameBackground" src="assets/editedFlappyBirdBackgroundDay2.png" data-canonical-image-url="assets/editedFlappyBirdBackgroundDay2.png"
+        data-object-fit="contain">
+      <button id="endPlayAgain">Play Again</button>
+      <label id="label1">Thanks for Playing</label>
+      <label id="label4">Made by JB Ladera</label>
+      <button id="resetVals">Reset</button>
+    </div>
+  </div>
+  <script src="code.js"></script>
+</body>
+
 </html>
