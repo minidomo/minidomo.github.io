@@ -257,7 +257,8 @@ onEvent("game", "keydown", function (event) {
             firstTime = false;
         }
         if (!bird.jump) {
-            playSound("assets/flappyBirdJump.mp3");
+            stopSound("assets/flappyBirdJump.mp3");
+            playSound("flappyBirdJump.mp3");
             bird.jump = true;
         }
     }
