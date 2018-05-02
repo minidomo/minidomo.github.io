@@ -1,7 +1,24 @@
-setStyle("game", "font-family: Consolas;");
-setStyle("endGame", "font-family: Consolas;");
-setStyle("endPlayAgain", "font-family: Consolas;");
-setStyle("resetVals", "font-family:Consolas;");
+var userID = getUserId();
+readRecords("Leaderboard", {}, function (records) {
+    var found = false;
+    for (var x in records)
+        if (records[x].userID === userID) {
+            found = true;
+            break;
+        }
+    if (!found)
+        createRecord("Leaderboard", { userID: userID, name: userID.substring(0, 8), score: 0 }, function () {
+        });
+});
+readRecords("Leaderboard", {}, function (records) {
+    records.forEach(function (x) {
+        console.log(x.id + ":\t" + x.name + "\t" + x.score + "\t" + x.userID);
+    });
+});
+setStyle("game", "font-family: monospace;");
+setStyle("endGame", "font-family: monospace;");
+setStyle("endPlayAgain", "font-family: monospace;");
+setStyle("resetVals", "font-family: monospace;");
 if (randomNumber(0, 1) === 0) {
     hideElement("backNight");
     showElement("backDay");
@@ -47,7 +64,6 @@ function reset() {
     second = new pipes(618, randomNumber(159, 335), "bot2Pipe", "top2Pipe");
     bird = new birdObj("bird");
     land = new landObj("floorBar");
-    alive = true;
     score = 0;
     setText("displayScore", score);
 }
@@ -95,8 +111,14 @@ function gameoverObj(idname, idname2, idname3, idname4, idname5, idname6) {
             format(idname4, 250, best);
             showElement(idname3);
             showElement(idname4);
-            if (bird.onFloor())
+            if (bird.onFloor()) {
+                readRecords("Leaderboard", { userID: userID }, function (records) {
+                    if (best > records[0].score)
+                        updateRecord("Leaderboard", { id: records[0].id, userID: userID, score: best, name: records[0].name }, function () {
+                        });
+                });
                 clearInterval(loop);
+            }
         }
     };
 
@@ -148,13 +170,16 @@ function birdObj(idname) {
     var height = 25;
     var gravity = 0.5;
     this.jump = false;
+    this.count = 0;
 
     this.move = function () {
         this.velY = fall(this.velY);
         y += this.velY;
         y = clamp(y, 0, 375 - height); // height of the platform
-        if (this.jump && alive)
+        if (this.jump && alive && this.count < 10) {
+            this.count++;
             this.velY = -6;
+        }
         setPosition(id, x, y);
     };
 
@@ -248,6 +273,28 @@ function pipes(xval, yval, idname, idname2) {
     };
 }
 
+function showBoard() {
+    setScreen("endGame");
+    setText("yourName", userID.substring(0, 8));
+    gameover.hide();
+    readRecords("Leaderboard", {}, function (records) {
+        var scores = [];
+        records.forEach(function (x) {
+            scores.push(x.name + " " + x.score);
+        });
+        scores.sort(function (a, b) {
+            return parseInt(a.split(" ")[1]) < parseInt(b.split(" ")[1]);
+        });
+        var string = "";
+        for (var x = 0; x < Math.min(scores.length, 10); x++) {
+            var prop = scores[x].split(" ");
+            prop[1] = prop[1].length === 1 ? "  " + prop[1] : prop[1].length === 2 ? " " + prop[1] : prop[1];
+            string += (x + 1) + ": " + prop[0] + "    " + prop[1] + "\n";
+        }
+        setText("scoreboard", string);
+    });
+}
+
 onEvent("game", "keydown", function (event) {
     var key = event.key;
     if ((key === " " || key === "w" || key === "Up") && alive) {
@@ -264,15 +311,17 @@ onEvent("game", "keydown", function (event) {
     }
 
     // play again
-    if (key === "d" && !alive) {
+    if (key === "d" && !alive && bird.onFloor()) {
+        alive = true;
         gameover.hide();
         reset();
     }
 
     // quit
-    if (key === "f" && !alive) {
-        setScreen("endGame");
+    if (key === "f" && !alive && bird.onFloor()) {
+        alive = true;
         gameover.hide();
+        showBoard();
     }
 });
 
@@ -280,26 +329,30 @@ onEvent("game", "keyup", function (event) {
     var key = event.key;
     if (key === " " || key === "w" || key === "Up") {
         bird.jump = false;
+        bird.count = 0;
     }
 });
 
 onEvent("playAgainBut", "click", function () {
+    alive = true;
     gameover.hide();
     reset();
 });
 
 onEvent("quitBut", "click", function () {
-    setScreen("endGame");
-    gameover.hide();
+    alive = true;
+    showBoard();
 });
 
 onEvent("resetVals", "click", function () {
-    setScreen("game");
     best = 0;
+    alive = true;
+    setScreen("game");
     reset();
 });
 
 onEvent("endPlayAgain", "click", function () {
+    alive = true;
     setScreen("game");
     reset();
 });
