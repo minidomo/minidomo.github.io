@@ -1,20 +1,20 @@
-var userID = getUserId();
-readRecords("Leaderboard", {}, function (records) {
-    var found = false;
-    for (var x in records)
-        if (records[x].userID === userID) {
-            found = true;
-            break;
-        }
-    if (!found)
-        createRecord("Leaderboard", { userID: userID, name: userID.substring(0, 8), score: 0 }, function () {
-        });
-});
-readRecords("Leaderboard", {}, function (records) {
-    records.forEach(function (x) {
-        console.log(x.id + ":\t" + x.name + "\t" + x.score + "\t" + x.userID);
-    });
-});
+// var userID = getUserId();
+// readRecords("Leaderboard", {}, function (records) {
+//     var found = false;
+//     for (var x in records)
+//         if (records[x].userID === userID) {
+//             found = true;
+//             break;
+//         }
+//     if (!found)
+//         createRecord("Leaderboard", { userID: userID, name: userID.substring(0, 8), score: 0 }, function () {
+//         });
+// });
+// readRecords("Leaderboard", {}, function (records) {
+//     records.forEach(function (x) {
+//         console.log(x.id + ":\t" + x.name + "\t" + x.score + "\t" + x.userID);
+//     });
+// });
 setStyle("game", "font-family: monospace;");
 setStyle("endGame", "font-family: monospace;");
 setStyle("endPlayAgain", "font-family: monospace;");
@@ -112,11 +112,11 @@ function gameoverObj(idname, idname2, idname3, idname4, idname5, idname6) {
             showElement(idname3);
             showElement(idname4);
             if (bird.onFloor()) {
-                readRecords("Leaderboard", { userID: userID }, function (records) {
-                    if (best > records[0].score)
-                        updateRecord("Leaderboard", { id: records[0].id, userID: userID, score: best, name: records[0].name }, function () {
-                        });
-                });
+                // readRecords("Leaderboard", { userID: userID }, function (records) {
+                //     if (best > records[0].score)
+                //         updateRecord("Leaderboard", { id: records[0].id, userID: userID, score: best, name: records[0].name }, function () {
+                //         });
+                // });
                 clearInterval(loop);
             }
         }
@@ -275,24 +275,24 @@ function pipes(xval, yval, idname, idname2) {
 
 function showBoard() {
     setScreen("endGame");
-    setText("yourName", userID.substring(0, 8));
+    // setText("yourName", userID.substring(0, 8));
     gameover.hide();
-    readRecords("Leaderboard", {}, function (records) {
-        var scores = [];
-        records.forEach(function (x) {
-            scores.push(x.name + " " + x.score);
-        });
-        scores.sort(function (a, b) {
-            return parseInt(a.split(" ")[1]) < parseInt(b.split(" ")[1]);
-        });
-        var string = "";
-        for (var x = 0; x < Math.min(scores.length, 10); x++) {
-            var prop = scores[x].split(" ");
-            prop[1] = prop[1].length === 1 ? "  " + prop[1] : prop[1].length === 2 ? " " + prop[1] : prop[1];
-            string += (x + 1) + ": " + prop[0] + "    " + prop[1] + "\n";
-        }
-        setText("scoreboard", string);
-    });
+    // readRecords("Leaderboard", {}, function (records) {
+    //     var scores = [];
+    //     records.forEach(function (x) {
+    //         scores.push(x.name + " " + x.score);
+    //     });
+    //     scores.sort(function (a, b) {
+    //         return parseInt(a.split(" ")[1]) < parseInt(b.split(" ")[1]);
+    //     });
+    //     var string = "";
+    //     for (var x = 0; x < Math.min(scores.length, 10); x++) {
+    //         var prop = scores[x].split(" ");
+    //         prop[1] = prop[1].length === 1 ? "  " + prop[1] : prop[1].length === 2 ? " " + prop[1] : prop[1];
+    //         string += (x + 1) + ": " + prop[0] + "    " + prop[1] + "\n";
+    //     }
+    //     setText("scoreboard", string);
+    // });
 }
 
 onEvent("game", "keydown", function (event) {
