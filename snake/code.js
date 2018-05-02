@@ -1,5 +1,5 @@
 setText("instructions", "Press WASD or Arrow Keys to move\n\nPress Spacebar or click Play Again to play again\n\n\nPress Spacebar to start the game");
-setStyle("game", "font-family: Lucida Console;");
+setStyle("game", "font-family: monospace;");
 
 var snake = {
     x: 0,
@@ -139,7 +139,7 @@ function gameOver() {
 
     setProperty("playagainButt", "font-size", 12);
 
-    setStyle("playagainButt", "font-family: Lucida Console; font-weight: bold;");
+    setStyle("playagainButt", "font-family: monospace; font-weight: bold;");
 
     onEvent("playagainButt", "click", function () {
         deleteElement("gameOverLabel");
