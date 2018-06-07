@@ -13,7 +13,7 @@
             font-size: 14px;
         }
 
-        a {
+        .bookmarklet {
             cursor: move;
         }
     </style>
@@ -28,17 +28,18 @@
     </div>
     <br>
     <div>
-        <a href="javascript:(function()%7Btry %7Bvar div %3D document.getElementById(&quot;divContentVideo&quot;)%3Bvar contents %3D div.innerHTML%3Bvar srcIndex %3D contents.indexOf(&quot;src&quot;) %2B 5%3Bvar halfweb %3D contents.substring(srcIndex)%3Bvar website %3D halfweb.substring(0%2C halfweb.indexOf(&quot;%5C&quot;&quot;))%3Bwindow.location %3D website%3B%7D catch (err) %7Balert(&quot;Must be on KissAnime and the correct page.&quot;)%3B%7D%7D)()">KissAnime</a>
+        <a class="bookmarklet" href="javascript:(function()%7Btry %7Bvar div %3D document.getElementById(&quot;divContentVideo&quot;)%3Bvar contents %3D div.innerHTML%3Bvar srcIndex %3D contents.indexOf(&quot;src&quot;) %2B 5%3Bvar halfweb %3D contents.substring(srcIndex)%3Bvar website %3D halfweb.substring(0%2C halfweb.indexOf(&quot;%5C&quot;&quot;))%3Bwindow.location %3D website%3B%7D catch (err) %7Balert(&quot;Must be on KissAnime and the correct page.&quot;)%3B%7D%7D)()">KissAnime</a>
     </div>
     <br>
     <div>
-        <a href="javascript:(function()%7Btry %7Bvar div %3D document.getElementById(&quot;videojs_html5_api&quot;)%3Bvar contents %3D div.innerHTML%3Bvar srcIndex %3D contents.indexOf(&quot;src&quot;) %2B 5%3Bvar halfweb %3D contents.substring(srcIndex)%3Bvar website %3D halfweb.substring(0%2C halfweb.indexOf(&quot;%5C&quot;&quot;))%3Bwindow.location %3D website%3B%7D catch (err) %7Balert(&quot;Must be on RapidVideo and the correct page.&quot;)%3B%7D%7D)()">RapidVideo</a>
+        <a class="bookmarklet" href="javascript:(function()%7Btry %7Bvar div %3D document.getElementById(&quot;videojs_html5_api&quot;)%3Bvar contents %3D div.innerHTML%3Bvar srcIndex %3D contents.indexOf(&quot;src&quot;) %2B 5%3Bvar halfweb %3D contents.substring(srcIndex)%3Bvar website %3D halfweb.substring(0%2C halfweb.indexOf(&quot;%5C&quot;&quot;))%3Bwindow.location %3D website%3B%7D catch (err) %7Balert(&quot;Must be on RapidVideo and the correct page.&quot;)%3B%7D%7D)()">RapidVideo</a>
     </div>
     <br>
     <embed src="Demonstration.mp4" width="1024" height="576"></embed>
     <br>
     <div>
-        Last Edited: 6/7/2018
+        <a href="https://github.com/MiniDomo/MiniDomo.github.io/blob/master/kissanime/bookmarklets.js">Source Code</a>
+        <br> Last Edited: 6/7/2018
     </div>
 </body>
 
