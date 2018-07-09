@@ -1,3 +1,4 @@
+// readRecords and data related functions only works on Code.org
 // var userID = getUserId();
 // readRecords("Leaderboard", {}, function (records) {
 //     var found = false;
@@ -36,6 +37,12 @@ var alive = true;
 var firstTime = true;
 var score = 0;
 var best = 0;
+// localStorage does not work on Code.org
+var hasLocalStorage = typeof (Storage) !== "undefined";
+if (hasLocalStorage && localStorage.getItem('highscore') !== null)
+    best = parseInt(localStorage.getItem('highscore'));
+else if (hasLocalStorage)
+    localStorage.setItem('highscore', '0');
 
 function update() {
     first.move();
@@ -105,13 +112,18 @@ function gameoverObj(idname, idname2, idname3, idname4, idname5, idname6) {
         if (y1 === 160) {
             showElement(idname5);
             showElement(idname6);
-            if (score > best)
+            if (score > best) {
                 best = score;
+                // localStorage does not work on Code.org
+                if (hasLocalStorage && best > parseInt(localStorage.getItem('highscore')))
+                    localStorage.setItem('highscore', '' + best);
+            }
             format(idname3, 200, score);
             format(idname4, 250, best);
             showElement(idname3);
             showElement(idname4);
             if (bird.onFloor()) {
+                // readRecords and data related functions only works on Code.org
                 // readRecords("Leaderboard", { userID: userID }, function (records) {
                 //     if (best > records[0].score)
                 //         updateRecord("Leaderboard", { id: records[0].id, userID: userID, score: best, name: records[0].name }, function () {
@@ -274,6 +286,7 @@ function pipes(xval, yval, idname, idname2) {
 }
 
 function showBoard() {
+    // readRecords and data related functions only works on Code.org
     setScreen("endGame");
     // setText("yourName", userID.substring(0, 8));
     gameover.hide();

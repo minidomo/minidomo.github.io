@@ -1,5 +1,5 @@
 setText("instructions", "Press WASD or Arrow Keys to move\n\nPress Spacebar or click Play Again to play again\n\n\nPress Spacebar to start the game");
-setStyle("game", "font-family: monospace;");
+setStyle("game", "font-family: Lucida Console;");
 
 var snake = {
     x: 0,
@@ -37,6 +37,12 @@ for (var a = 20; a < 440; a += 10)
 var doGameOver = 0;
 var startUp = true;
 var highscore = 0;
+// localStorage does not work on Code.org
+var hasLocalStorage = typeof (Storage) !== "undefined";
+if (hasLocalStorage && localStorage.getItem('highscore') !== null)
+    highscore = parseInt(localStorage.getItem('highscore'));
+else if (hasLocalStorage)
+    localStorage.setItem('highscore', '1');
 
 function snakeObj() {
     if (ai.access)
@@ -115,8 +121,12 @@ function xyIsSame(x, y) {
 }
 
 function gameOver() {
-    if (snake.IDandLength > highscore)
+    if (snake.IDandLength > highscore) {
         highscore = snake.IDandLength;
+        // localStorage does not work on Code.org
+        if (hasLocalStorage && highscore > parseInt(localStorage.getItem('highscore')))
+            localStorage.setItem('highscore', '' + highscore);
+    }
 
     setText("highscorelabel", "Best: " + highscore);
 
@@ -139,7 +149,7 @@ function gameOver() {
 
     setProperty("playagainButt", "font-size", 12);
 
-    setStyle("playagainButt", "font-family: monospace; font-weight: bold;");
+    setStyle("playagainButt", "font-family: Lucida Console; font-weight: bold;");
 
     onEvent("playagainButt", "click", function () {
         deleteElement("gameOverLabel");
@@ -377,7 +387,7 @@ onEvent("game", "keydown", function (event) {
         if (key == " ") {
             startUp = false;
             hideElement("instructions");
-            setText("highscorelabel", "Best: 1");
+            setText("highscorelabel", "Best: " + highscore);
             reset();
         } else {
             if (key != "b" && key != "o" && key != "t") {
