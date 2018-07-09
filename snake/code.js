@@ -197,7 +197,7 @@ function gameOver() {
             ai.b = false;
             ai.o = false;
             ai.t = false;
-            highscore = 0;
+            highscore = 1;
 
             showElement("instructions");
             setText("scorelabel", "");
@@ -427,7 +427,7 @@ onEvent("game", "keydown", function (event) {
             ai.b = false;
             ai.o = false;
             ai.t = false;
-            highscore = 0;
+            highscore = 1;
 
             showElement("instructions");
             setText("scorelabel", "");
