@@ -39,10 +39,10 @@ var startUp = true;
 var highscore = 1;
 // localStorage does not work on Code.org
 var hasLocalStorage = typeof (Storage) !== "undefined";
-if (hasLocalStorage && localStorage.getItem('highscore') !== null)
-    highscore = parseInt(localStorage.getItem('highscore'));
+if (hasLocalStorage && localStorage.getItem('MiniDomoSnakeHighscore') !== null)
+    highscore = parseInt(localStorage.getItem('MiniDomoSnakeHighscore'));
 else if (hasLocalStorage)
-    localStorage.setItem('highscore', '1');
+    localStorage.setItem('MiniDomoSnakeHighscore', '1');
 
 function snakeObj() {
     if (ai.access)
@@ -124,8 +124,8 @@ function gameOver() {
     if (snake.IDandLength > highscore) {
         highscore = snake.IDandLength;
         // localStorage does not work on Code.org
-        if (hasLocalStorage && highscore > parseInt(localStorage.getItem('highscore')))
-            localStorage.setItem('highscore', '' + highscore);
+        if (hasLocalStorage && highscore > parseInt(localStorage.getItem('MiniDomoSnakeHighscore')))
+            localStorage.setItem('MiniDomoSnakeHighscore', '' + highscore);
     }
 
     setText("highscorelabel", "Best: " + highscore);

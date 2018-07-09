@@ -39,10 +39,10 @@ var score = 0;
 var best = 0;
 // localStorage does not work on Code.org
 var hasLocalStorage = typeof (Storage) !== "undefined";
-if (hasLocalStorage && localStorage.getItem('highscore') !== null)
-    best = parseInt(localStorage.getItem('highscore'));
+if (hasLocalStorage && localStorage.getItem('MiniDomoFlappyBirdHighscore') !== null)
+    best = parseInt(localStorage.getItem('MiniDomoFlappyBirdHighscore'));
 else if (hasLocalStorage)
-    localStorage.setItem('highscore', '0');
+    localStorage.setItem('MiniDomoFlappyBirdHighscore', '0');
 
 function update() {
     first.move();
@@ -115,8 +115,8 @@ function gameoverObj(idname, idname2, idname3, idname4, idname5, idname6) {
             if (score > best) {
                 best = score;
                 // localStorage does not work on Code.org
-                if (hasLocalStorage && best > parseInt(localStorage.getItem('highscore')))
-                    localStorage.setItem('highscore', '' + best);
+                if (hasLocalStorage && best > parseInt(localStorage.getItem('MiniDomoFlappyBirdHighscore')))
+                    localStorage.setItem('MiniDomoFlappyBirdHighscore', '' + best);
             }
             format(idname3, 200, score);
             format(idname4, 250, best);
