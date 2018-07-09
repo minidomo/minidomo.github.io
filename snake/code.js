@@ -36,7 +36,7 @@ for (var a = 20; a < 440; a += 10)
 
 var doGameOver = 0;
 var startUp = true;
-var highscore = 0;
+var highscore = 1;
 // localStorage does not work on Code.org
 var hasLocalStorage = typeof (Storage) !== "undefined";
 if (hasLocalStorage && localStorage.getItem('highscore') !== null)
