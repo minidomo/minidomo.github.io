@@ -235,8 +235,6 @@ var readPotionChart = function () {
             if (isNum(standcount) && standcount !== '0')
                 Totals.brewing_stand += parseInt(standcount);
 
-            // console.log(setcount);
-
             if (isNum(setcount) && setcount !== '0') {
                 var arr = Potion[nameofpotion].Recipe;
                 arr.forEach(function (x) {
@@ -253,7 +251,6 @@ var readPotionChart = function () {
     }
     tableChildren[24].childNodes[7].textContent = showStacks ? convertToStacks(total) : total;
     for (var prop in IngredientsTable) {
-        // console.log(prop + ': ' + IngredientsTable[prop] + ' ' + Totals[prop]);
         if (IngredientsTable[prop] !== Totals[prop]) {
             if (Totals[prop] === 0) {
                 TDTH.remove(prop);
@@ -287,7 +284,7 @@ var convertToBlocks = function (stacksAndBlocks) {
 
 document.getElementById('getStacks').addEventListener('click', function () {
     showStacks = !showStacks;
-    this.textContent = 'Convert to ' + (showStacks ? 'Blocks' : 'Stacks');
+    this.textContent = showStacks ? 'Stacks' : 'Blocks';
     for (var x = 2; x <= 24; x += 2) {
         var totalGoldDisplay = document.getElementById('potionChart').childNodes[1].childNodes[x].childNodes[7];
         totalGoldDisplay.textContent = showStacks ? convertToStacks(parseInt(totalGoldDisplay.textContent)) : convertToBlocks(totalGoldDisplay.textContent);
@@ -306,11 +303,7 @@ document.getElementById('getStacks').addEventListener('mouseleave', function () 
 
 document.getElementById('includeStand').addEventListener('click', function () {
     includeStand = !includeStand;
-    this.textContent = 'With' + (includeStand ? 'out ' : ' ') + 'Stand';
-    // for (var x = 2; x <= 24; x += 2) {
-    //     var totalGoldDisplay = document.getElementById('potionChart').childNodes[1].childNodes[x].childNodes[7];
-    //     totalGoldDisplay.textContent = includeStand ? convertToStacks(parseInt(totalGoldDisplay.textContent)) : convertToBlocks(totalGoldDisplay.textContent);
-    // }
+    this.textContent = 'With' + (includeStand ? ' ' : 'out ') + 'Stand';
 });
 
 document.getElementById('includeStand').addEventListener('mouseover', function () {
@@ -325,7 +318,7 @@ document.getElementById('includeStand').addEventListener('mouseleave', function 
 
 document.getElementById('excludeRedstoneCost').addEventListener('click', function () {
     excludeRedstoneCost = !excludeRedstoneCost;
-    this.textContent = (excludeRedstoneCost ? 'In' : 'Ex') + 'clude Redstone Cost';
+    this.textContent = (excludeRedstoneCost ? 'Ex' : 'In') + 'clude Redstone Cost';
     // TODO make this better
     readPotionChart();
 });
