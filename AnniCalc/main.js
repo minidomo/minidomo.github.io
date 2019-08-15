@@ -1,4 +1,4 @@
-var Potion = {
+const Potion = {
     Regeneration: {
         Cost: 21,
         Recipe: ['empty_bottle', 'nether_wart', 'ghast_tear']
@@ -43,9 +43,9 @@ var Potion = {
         Cost: 11,
         Recipe: ['empty_bottle', 'nether_wart', 'glistering_melon', 'fermented_spider_eye']
     }
-}
+};
 
-var BrewingShop = {
+const BrewingShop = {
     BrewingStand: 10,
     Bottles: 1,
     NetherWart: 5,
@@ -58,9 +58,9 @@ var BrewingShop = {
     GoldenCarrot: 2,
     SpiderEye: 2,
     BlazePowder: 15
-}
+};
 
-var IngredientsTable = {
+const IngredientsTable = {
     blaze_powder: 0,
     brewing_stand: 0,
     empty_bottle: 0,
@@ -75,40 +75,40 @@ var IngredientsTable = {
     redstone: 0,
     spider_eye: 0,
     sugar: 0,
-}
+};
 
-var TDTH = {
+const TDTH = {
     remove(id) {
-        var firstRow = document.getElementById(id),
+        const firstRow = document.getElementById(id),
             secondRow = document.getElementById(id + '-count');
         firstRow.parentNode.removeChild(firstRow);
         secondRow.parentNode.removeChild(secondRow);
     },
     add(id, val) {
-        var tableRowFirst = document.getElementById('ingredients-first-row'),
+        const tableRowFirst = document.getElementById('ingredients-first-row'),
             tableRowSecond = document.getElementById('ingredients-second-row');
 
-        var th = document.createElement('th');
+        const th = document.createElement('th');
         th.id = id;
-        var img = new Image();
+        const img = new Image();
         img.src = 'assets/' + id + '.png';
         th.appendChild(img);
 
         tableRowFirst.appendChild(th);
 
-        var td = document.createElement('td');
+        const td = document.createElement('td');
         td.id = id + '-count';
         td.innerHTML = val;
 
         tableRowSecond.appendChild(td);
     },
     modify(id, val) {
-        var td = document.getElementById(id + '-count');
+        const td = document.getElementById(id + '-count');
         td.innerHTML = val;
     }
 }
 
-var Totals = {
+const Totals = {
     blaze_powder: 0,
     brewing_stand: 0,
     empty_bottle: 0,
@@ -125,14 +125,14 @@ var Totals = {
     sugar: 0
 }
 
-var showStacks = false;
-var includeStand = false;
-var excludeRedstoneCost = false;
+let showStacks = false;
+let includeStand = false;
+let excludeRedstoneCost = false;
 
-var update = function (element) {
-    var tableRowChildren = element.parentElement.parentElement.childNodes;
+const update = element => {
+    const tableRowChildren = element.parentElement.parentElement.childNodes;
 
-    var sets = tableRowChildren[3].childNodes[1].value,
+    let sets = tableRowChildren[3].childNodes[1].value,
         brewingStands = tableRowChildren[5].childNodes[1].value,
         potionName = tableRowChildren[1].childNodes[1].value,
         extra = 0;
@@ -143,8 +143,8 @@ var update = function (element) {
         tableRowChildren[3].childNodes[1].style.backgroundColor = 'white';
     } else {
         if (sets !== '') {
-            tableRowChildren[3].style.backgroundColor = '#9DFFF9';
-            tableRowChildren[3].childNodes[1].style.backgroundColor = '#9DFFF9';
+            tableRowChildren[3].style.backgroundColor = '#FF495C';
+            tableRowChildren[3].childNodes[1].style.backgroundColor = '#FF495C';
         } else {
             tableRowChildren[3].style.backgroundColor = 'white';
             tableRowChildren[3].childNodes[1].style.backgroundColor = 'white';
@@ -158,8 +158,8 @@ var update = function (element) {
         tableRowChildren[5].childNodes[1].style.backgroundColor = 'white';
     } else {
         if (brewingStands !== '') {
-            tableRowChildren[5].style.backgroundColor = '#9DFFF9';
-            tableRowChildren[5].childNodes[1].style.backgroundColor = '#9DFFF9';
+            tableRowChildren[5].style.backgroundColor = '#FF495C';
+            tableRowChildren[5].childNodes[1].style.backgroundColor = '#FF495C';
         } else {
             tableRowChildren[5].style.backgroundColor = 'white';
             tableRowChildren[5].childNodes[1].style.backgroundColor = 'white';
@@ -168,7 +168,7 @@ var update = function (element) {
     }
 
     if (includeStand) {
-        var cell = element.parentElement.cellIndex;
+        const cell = element.parentElement.cellIndex;
         if (cell === 1) {
             brewingStands = sets;
             tableRowChildren[5].childNodes[1].value = sets === 0 ? '' : sets;
@@ -178,10 +178,10 @@ var update = function (element) {
         }
     }
 
-    if (potionName.indexOf(' ') >= 0) {
-        var arr = potionName.split(' ');
+    if (potionName.includes(' ')) {
+        const arr = potionName.split(' ');
         potionName = '';
-        arr.forEach(function (word) {
+        arr.forEach(word => {
             if (word === 'Ext.') {
                 if (!excludeRedstoneCost)
                     extra += BrewingShop.Redstone;
@@ -190,35 +190,35 @@ var update = function (element) {
         });
     }
 
-    var goldForRow = (sets * (Potion[potionName].Cost + extra)) + (brewingStands * BrewingShop.BrewingStand);
+    const goldForRow = (sets * (Potion[potionName].Cost + extra)) + (brewingStands * BrewingShop.BrewingStand);
 
     tableRowChildren[7].textContent = showStacks ? convertToStacks(goldForRow) : goldForRow;
     readPotionChart();
 }
 
-var readPotionChart = function () {
-    var tableChildren = document.getElementById('potionChart').childNodes[1].childNodes;
-    var total = 0;
+const readPotionChart = () => {
+    const tableChildren = document.getElementById('potionChart').childNodes[1].childNodes;
+    let total = 0;
     resetTotals();
-    for (var x = 2; x <= 22; x += 2) {
-        var theTotalGold = tableChildren[x].childNodes[7].innerHTML;
-        if (theTotalGold.indexOf(' ') >= 0) {
-            var arr = theTotalGold.split(' ');
+    for (let x = 2; x <= 22; x += 2) {
+        let theTotalGold = tableChildren[x].childNodes[7].innerHTML;
+        if (theTotalGold.includes(' ')) {
+            let arr = theTotalGold.split(' ');
             if (arr.length > 2)
                 continue;
             theTotalGold = '' + convertToBlocks(theTotalGold);
         }
         if (isNum(theTotalGold)) {
-            var setcount = tableChildren[x].childNodes[3].childNodes[1].value,
+            let setcount = tableChildren[x].childNodes[3].childNodes[1].value,
                 standcount = tableChildren[x].childNodes[5].childNodes[1].value,
                 nameofpotion = tableChildren[x].childNodes[1].childNodes[1].value;
 
-            var hasExt = nameofpotion.indexOf('Ext.') >= 0;
+            let hasExt = nameofpotion.includes('Ext.');
 
-            if (nameofpotion.indexOf(' ') >= 0) {
-                var arr = nameofpotion.split(' ');
+            if (nameofpotion.includes(' ')) {
+                const arr = nameofpotion.split(' ');
                 nameofpotion = '';
-                arr.forEach(function (word) {
+                arr.forEach(word => {
                     if (isNum(setcount)) {
                         if (word === 'Ext.')
                             Totals.redstone += parseInt(setcount);
@@ -236,21 +236,21 @@ var readPotionChart = function () {
                 Totals.brewing_stand += parseInt(standcount);
 
             if (isNum(setcount) && setcount !== '0') {
-                var arr = Potion[nameofpotion].Recipe;
-                arr.forEach(function (x) {
+                const arr = Potion[nameofpotion].Recipe;
+                arr.forEach(x => {
                     Totals[x] += parseInt(setcount);
                 });
             }
 
             setcount = isNum(setcount) ? parseInt(setcount) : 0;
             standcount = isNum(standcount) ? parseInt(standcount) : 0;
-            var current = (setcount * (Potion[nameofpotion].Cost + (!hasExt ? 0 : (excludeRedstoneCost ? 0 : 3)))) + (standcount * BrewingShop.BrewingStand);
+            const current = (setcount * (Potion[nameofpotion].Cost + (!hasExt ? 0 : (excludeRedstoneCost ? 0 : 3)))) + (standcount * BrewingShop.BrewingStand);
             total += current;
             tableChildren[x].childNodes[7].innerHTML = showStacks ? convertToStacks(current) : current;
         }
     }
     tableChildren[24].childNodes[7].textContent = showStacks ? convertToStacks(total) : total;
-    for (var prop in IngredientsTable) {
+    for (const prop in IngredientsTable) {
         if (IngredientsTable[prop] !== Totals[prop]) {
             if (Totals[prop] === 0) {
                 TDTH.remove(prop);
@@ -264,71 +264,75 @@ var readPotionChart = function () {
     }
 }
 
-var resetTotals = function () {
-    for (var prop in Totals)
+const resetTotals = () => {
+    for (let prop in Totals)
         Totals[prop] = 0;
 }
 
-var isNum = function (string) {
-    return !isNaN(parseInt(string)) && string.match('\\D') === null;
+const isNum = string => {
+    return /^\d+$/.test(string);
 }
 
-var convertToStacks = function (number) {
+const convertToStacks = number => {
     return Math.floor(number / 64) + ' ' + (number % 64);
 }
 
-var convertToBlocks = function (stacksAndBlocks) {
-    var arr = stacksAndBlocks.split(' ');
+const convertToBlocks = stacksAndBlocks => {
+    const arr = stacksAndBlocks.split(' ');
     return parseInt(arr[0]) * 64 + parseInt(arr[1]);
 }
 
-document.getElementById('getStacks').addEventListener('click', function () {
+const conversionButton = document.getElementById('conversionButton');
+const standButton = document.getElementById('includeStand');
+const redstoneButton = document.getElementById('excludeRedstoneCost');
+
+conversionButton.addEventListener('click', function () {
     showStacks = !showStacks;
     this.textContent = showStacks ? 'Stacks' : 'Blocks';
-    for (var x = 2; x <= 24; x += 2) {
-        var totalGoldDisplay = document.getElementById('potionChart').childNodes[1].childNodes[x].childNodes[7];
+    for (let x = 2; x <= 24; x += 2) {
+        const totalGoldDisplay = document.getElementById('potionChart').childNodes[1].childNodes[x].childNodes[7];
         totalGoldDisplay.textContent = showStacks ? convertToStacks(parseInt(totalGoldDisplay.textContent)) : convertToBlocks(totalGoldDisplay.textContent);
     }
 });
 
-document.getElementById('getStacks').addEventListener('mouseover', function () {
+conversionButton.addEventListener('mouseover', function () {
     this.style.backgroundColor = showStacks ? '#D8315B' : 'white';
     this.style.color = showStacks ? '#FFFAFF' : '#D8315B';
 });
 
-document.getElementById('getStacks').addEventListener('mouseleave', function () {
+conversionButton.addEventListener('mouseleave', function () {
     this.style.backgroundColor = !showStacks ? '#D8315B' : 'white';
     this.style.color = !showStacks ? '#FFFAFF' : '#D8315B';
 });
 
-document.getElementById('includeStand').addEventListener('click', function () {
+standButton.addEventListener('click', function () {
     includeStand = !includeStand;
     this.textContent = 'With' + (includeStand ? ' ' : 'out ') + 'Stand';
 });
 
-document.getElementById('includeStand').addEventListener('mouseover', function () {
+standButton.addEventListener('mouseover', function () {
     this.style.backgroundColor = includeStand ? '#D8315B' : 'white';
     this.style.color = includeStand ? '#FFFAFF' : '#D8315B';
 });
 
-document.getElementById('includeStand').addEventListener('mouseleave', function () {
+standButton.addEventListener('mouseleave', function () {
     this.style.backgroundColor = !includeStand ? '#D8315B' : 'white';
     this.style.color = !includeStand ? '#FFFAFF' : '#D8315B';
 });
 
-document.getElementById('excludeRedstoneCost').addEventListener('click', function () {
+redstoneButton.addEventListener('click', function () {
     excludeRedstoneCost = !excludeRedstoneCost;
     this.textContent = (excludeRedstoneCost ? 'Ex' : 'In') + 'clude Redstone Cost';
     // TODO make this better
     readPotionChart();
 });
 
-document.getElementById('excludeRedstoneCost').addEventListener('mouseover', function () {
+redstoneButton.addEventListener('mouseover', function () {
     this.style.backgroundColor = excludeRedstoneCost ? '#D8315B' : 'white';
     this.style.color = excludeRedstoneCost ? '#FFFAFF' : '#D8315B';
 });
 
-document.getElementById('excludeRedstoneCost').addEventListener('mouseleave', function () {
+redstoneButton.addEventListener('mouseleave', function () {
     this.style.backgroundColor = !excludeRedstoneCost ? '#D8315B' : 'white';
     this.style.color = !excludeRedstoneCost ? '#FFFAFF' : '#D8315B';
 });
