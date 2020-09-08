@@ -1,16 +1,37 @@
 <html>
-  <head>
-    <title>Snake</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-    <script src="applab/applab-api.js"></script>
-    <link rel="stylesheet" href="applab/applab.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" type="image/png" href="assets/greenBox.png"/>
-  </head>
-  <body>
-    <div id="divApplab" class="appModern running" tabindex="1" style="width: 320px; height: 450px; display: block; margin: auto;"><div class="screen" tabindex="1" id="game"><img src="assets/greenBox.png" data-canonical-image-url="assets/greenBox.png" data-object-fit="contain" id="snake" class="design-mode-hidden"><label id="scorelabel"></label><label id="highscorelabel"></label><label id="testLabel1" class="design-mode-hidden">GAME OVER</label><button id="testButton2" class="design-mode-hidden">Exit</button><label id="testLabel2" class="design-mode-hidden">Score: 0</label><button id="testButton1" class="design-mode-hidden">Play Again</button><label id="wall1"></label><label id="wall2"></label><label id="wall3"></label><img src="assets/redBox.png" data-canonical-image-url="assets/redBox.png" data-object-fit="contain" id="fruit" class="design-mode-hidden"><label id="instructions"></label></div></div>
-    <script src="code.js"></script>
-  </body>
+
+<head>
+  <title>Snake</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script src="applab/applab-api.js"></script>
+  <link rel="stylesheet" href="applab/applab.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/png" href="assets/greenBox.png" />
+</head>
+
+<body>
+  <div id="divApplab" class="appModern running" tabindex="1"
+    style="width: 320px; height: 450px; display: block; margin: auto;">
+    <div class="screen" tabindex="1" id="game">
+      <img src="assets/greenBox.png" data-canonical-image-url="assets/greenBox.png" data-object-fit="contain"
+        id="snake_0" class="design-mode-hidden">
+      <label id="scorelabel"></label>
+      <label id="highscorelabel"></label>
+      <label id="testLabel1" class="design-mode-hidden">GAME OVER</label>
+      <button id="testButton2" class="design-mode-hidden">Exit</button>
+      <label id="testLabel2" class="design-mode-hidden">Score: 0</label>
+      <button id="testButton1" class="design-mode-hidden">Play Again</button>
+      <label id="wall1"></label><label id="wall2"></label>
+      <label id="wall3"></label><img src="assets/redBox.png" data-canonical-image-url="assets/redBox.png"
+        data-object-fit="contain" id="fruit" class="design-mode-hidden"><label id="instructions"></label>
+    </div>
+  </div>
+  <script src="code.js"></script>
+  <script>
+    document.getElementById('game').focus();
+  </script>
+</body>
+
 </html>
