@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://minidomo.github.io/rhe-306-presentation/categories/</loc>
+    <loc>https://minidomo.github.io/rhe-306-presentation/public/categories/</loc>
   </url><url>
-    <loc>https://minidomo.github.io/rhe-306-presentation/</loc>
+    <loc>https://minidomo.github.io/rhe-306-presentation/public/</loc>
   </url><url>
-    <loc>https://minidomo.github.io/rhe-306-presentation/tags/</loc>
+    <loc>https://minidomo.github.io/rhe-306-presentation/public/tags/</loc>
   </url>
 </urlset>
