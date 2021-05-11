@@ -1,0 +1,13 @@
+baseURL = "https://minidomo.github.io/rhe-306-presentation"
+languageCode = "en-us"
+title = "RHE 306 Presentation"
+
+theme = "reveal-hugo"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
