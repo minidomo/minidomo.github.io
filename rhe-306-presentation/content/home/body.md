@@ -33,11 +33,13 @@ An improved service for low-SES students.
 
 ---
 
+{{< slide background-image="./images/computer.jpg" background-color="#000000">}}
+
 ## One computer
 
 ---
 
-
+{{< slide background-image="./images/students.jpg" >}}
 
 ---
 
