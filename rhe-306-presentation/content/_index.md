@@ -1,14 +1,17 @@
 +++
-title = "RHE 306 Presentation"
+title = "Transparency with low-SES students | RHE 306"
 outputs = ["Reveal"]
+[reveal_hugo]
+custom_theme = "reveal-hugo/themes/robot-lung.css"
+margin = 0.2
+highlight_theme = "color-brewer"
+transition = "slide"
+transition_speed = "fast"
+[reveal_hugo.templates.hotpink]
+class = "hotpink"
+background = "#FF4081"
 +++
 
-# Hello world!
+# Transparency with low-SES students
 
-This is my first slide.
-
----
-
-# 2nd Slide
-
-something here.
+~ by JB Ladera ~

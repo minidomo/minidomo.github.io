@@ -3,16 +3,63 @@
   <head>
 	<meta name="generator" content="Hugo 0.83.1" />
     <meta charset="utf-8">
-<title>RHE 306 Presentation</title>
+<title>Transparency with low-SES students | RHE 306</title>
 
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/rhe-306-presentation/public/reveal-js/css/reset.css">
-<link rel="stylesheet" href="/rhe-306-presentation/public/reveal-js/css/reveal.css"><link rel="stylesheet" href="/rhe-306-presentation/public/reveal-js/css/theme/black.css" id="theme">
-<link rel="stylesheet" href="/rhe-306-presentation/public/highlight-js/default.min.css">
+<link rel="stylesheet" href="/rhe-306-presentation/public/reveal-js/css/reveal.css"><link rel="stylesheet" href="/rhe-306-presentation/public/reveal-hugo/themes/robot-lung.css" id="theme"><link rel="stylesheet" href="/rhe-306-presentation/public/highlight-js/color-brewer.min.css">
     
+
+<style>
+     
+    .reveal section pre {
+        box-shadow: none;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        border: 1px solid lightgrey;
+    }
+
+    .reveal section pre:hover {
+        border: 1px solid grey;
+        transition: border 0.3s ease;
+    }
+
+    .reveal section pre>code {
+        padding: 10px;
+    }
+
+    .reveal table {
+        font-size: 0.65em;
+    }
+
+     
+    .reveal section.side-by-side h1 {
+        position: absolute;
+    }
+
+    .reveal section.side-by-side h1:first-of-type {
+        left: 25%;
+    }
+
+    .reveal section.side-by-side h1:nth-of-type(2) {
+        right: 25%;
+    }
+
+    .reveal section[data-background-image] a,
+    .reveal section[data-background-image] p,
+    .reveal section[data-background-image] h2 {
+        color: white;
+    }
+
+    .reveal section[data-background-image] a {
+        text-decoration: underline;
+    }
+</style>
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
     
@@ -20,19 +67,29 @@
       <div class="slides">
   
 
-    <section><h1 id="hello-world">Hello world!</h1>
-<p>This is my first slide.</p>
-</section><section>
-<h1 id="2nd-slide">2nd Slide</h1>
-<p>something here.</p>
+    <section><h1 id="transparency-with-low-ses-students">Transparency with low-SES students</h1>
+<p>~ by JB Ladera ~</p>
 </section>
 
   
 
+    
+<section data-noprocess data-shortcode-slide
+      data-background-color="#000000"
+      data-background-image="./images/skeleton_call.png">
+  
+<h2 id="long-reponse-times">Long reponse times</h2>
+</section><section>
+<h2 id="automated-emails">Automated Emails</h2>
+<p>An improved service for low-SES students.</p>
+</section>
 
 </div>
       
-
+<div class="line top"></div>
+<div class="line bottom"></div>
+<div class="line left"></div>
+<div class="line right"></div>
     </div>
 <script type="text/javascript" src=/rhe-306-presentation/public/reveal-hugo/object-assign.js></script>
 
@@ -46,8 +103,8 @@
   document.getElementsByTagName('head')[0].appendChild(link);
 </script>
 
-<script type="application/json" id="reveal-hugo-site-params">null</script>
-<script type="application/json" id="reveal-hugo-page-params">null</script>
+<script type="application/json" id="reveal-hugo-site-params">{"history":true}</script>
+<script type="application/json" id="reveal-hugo-page-params">{"custom_theme":"reveal-hugo/themes/robot-lung.css","highlight_theme":"color-brewer","margin":0.2,"templates":{"hotpink":{"background":"#FF4081","class":"hotpink"}},"transition":"slide","transition_speed":"fast"}</script>
 
 <script src="/rhe-306-presentation/public/reveal-js/js/reveal.js"></script>
 
@@ -96,5 +153,13 @@
 
     
     
+
+
+<script type="text/javascript">
+    
+    Reveal.addEventListener('slidechanged', function (event) {
+        console.log("🎞️ Slide is now " + event.indexh);
+    });
+</script>
   </body>
 </html>
