@@ -1,0 +1,47 @@
+body {
+    margin          : 0;
+    background-color: #0B2234;
+    color           : #E6DBB5;
+    font-family     : monospace;
+}
+
+#output-values input {
+    width: 500px;
+}
+
+#input-values input {
+    width: 150px;
+}
+
+button {}
+
+.wrapper>div {
+    display: inline-block;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+div {
+    margin: 15px;
+}
+
+button,
+input {
+    padding         : 7px;
+    margin          : 0;
+    border          : 0;
+    color           : inherit;
+    outline         : #E6DBB5 solid 1px;
+    background-color: #064155;
+    font-family     : inherit;
+}
+
+table {
+    text-align: center;
+}
+
+td {
+    padding: 5px;
+}
