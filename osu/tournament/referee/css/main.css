@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    background-color: #0B2234;
+    color: #E6DBB5;
+    font-family: monospace;
+}
+
+button,
+input {
+    padding: 7px;
+    margin: 0;
+    color: inherit;
+    border: 1px solid #E6DBB5;
+    background-color: #064155;
+    font-family: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+#main-wrapper {
+    display: flow-root;
+    box-sizing: border-box;
+    padding: 20px 0 20px 0;
+}
+
+#main {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 50px;
+}
+
+#input-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.individual-input-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-row-container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}
+
+#output-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.individual-output-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 4px;
+}
+
+.output-row-container {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 4px;
+}
+
+.output-text {
+    width: 500px;
+}
+
+#notes-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#notes-list-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 6px;
+}

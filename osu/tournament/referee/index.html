@@ -6,79 +6,234 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>osu! Tournament Referee</title>
-    <script src="./scripts/script.js"></script>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" />
 </head>
 
 <body>
-    <div class="wrapper">
-        <div id="input-values">
-            <table>
-                <tr>
-                    <td colspan="2">Best of</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="text" placeholder="0" id="bestof-input">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">Teams</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" placeholder="Team1" id="team1-input">
-                    </td>
-                    <td>
-                        <input type="text" placeholder="Team2" id="team2-input">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">Scores</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" placeholder="0" id="team1-score-input">
-                    </td>
-                    <td>
-                        <input type="text" placeholder="0" id="team2-score-input">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">Current Picker</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="text" placeholder="Team1" id="current-picker-input">
-                    </td>
-                </tr>
-            </table>
+    <div id="main-wrapper">
+        <div id="main">
+            <div id="input-container">
+                <div class="individual-input-container">
+                    <div class="title-container">
+                        <div class="title-text">Best of</div>
+                    </div>
+                    <div class="input-source-container">
+                        <input type="text" placeholder="0" id="bestof-input-source">
+                    </div>
+                </div>
+                <div class="individual-input-container">
+                    <div class="title-container">
+                        <div class="title-text">Team names</div>
+                    </div>
+                    <div class="input-row-container">
+                        <div class="input-source-container">
+                            <input type="text" placeholder="Left team" id="left-team-name-input-source">
+                        </div>
+                        <div class="input-source-container">
+                            <input type="text" placeholder="Right team" id="right-team-name-input-source">
+                        </div>
+                    </div>
+                </div>
+                <div class="individual-input-container">
+                    <div class="title-container">
+                        <div class="title-text">Points</div>
+                    </div>
+                    <div class="input-row-container">
+                        <div class="input-source-container">
+                            <input type="text" placeholder="0" id="left-team-points-input-source">
+                        </div>
+                        <div class="input-source-container">
+                            <input type="text" placeholder="0" id="right-team-points-input-source">
+                        </div>
+                    </div>
+                </div>
+                <div class="individual-input-container">
+                    <div class="title-container">
+                        <div class="title-text">High Roller</div>
+                    </div>
+                    <div class="input-source-container">
+                        <input type="text" placeholder="Team name" id="high-roller-input-source">
+                    </div>
+                </div>
+                <div class="individual-input-container">
+                    <div class="title-container">
+                        <div class="title-text">First Picker</div>
+                    </div>
+                    <div class="input-source-container">
+                        <input type="text" placeholder="Team name" id="first-picker-input-source">
+                    </div>
+                </div>
+            </div>
+
+            <div id="output-container">
+                <div class="individual-output-container">
+                    <div class="title-container">
+                        <div class="title-text">General</div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-score-text-pick">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="score-text-pick" readonly
+                                value=" |  -  |  // Best of ,  you have 120 seconds to pick a map">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-score-text-tiebreaker">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="score-text-tiebreaker" readonly
+                                value=" |  -  |  // Best of , we will now be playing tiebreaker">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-score-text-winner">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="score-text-winner" readonly
+                                value=" |  -  |  // Best of , Congratulations to !">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-roll-text">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="roll-text" readonly
+                                value="Please roll for pick and ban order">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-warm-up-text">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="warm-up-text" readonly
+                                value="Would anyone like to select a warm up?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-tiebreaker-text">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="tiebreaker-text" readonly
+                                value="Would you guys like to play tiebreaker for fun?">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="individual-output-container">
+                    <div class="title-container">
+                        <div class="title-text">Pick/Bans Order</div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-high-roll-text">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="high-roll-text" readonly
+                                value=" would you like first or second pick or first or second ban?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-low-roll-text-ban">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="low-roll-text-ban" readonly
+                                value=" would you like first or second ban?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-low-roll-text-pick">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="low-roll-text-pick" readonly
+                                value=" would you like first or second pick?">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="individual-output-container">
+                    <div class="title-container">
+                        <div class="title-text">Bans</div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-high-roll-text-first-ban">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="high-roll-text-first-ban" readonly
+                                value=" what is your first ban?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-high-roll-text-second-ban">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="high-roll-text-second-ban" readonly
+                                value=" what is your second ban?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-low-roll-text-first-ban">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="low-roll-text-first-ban" readonly
+                                value=" what is your first ban?">
+                        </div>
+                    </div>
+                    <div class="output-row-container">
+                        <div class="output-button-container">
+                            <button id="copy-button-low-roll-text-second-ban">Copy</button>
+                        </div>
+                        <div class="output-text-container">
+                            <input type="text" class="output-text" id="low-roll-text-second-ban" readonly
+                                value=" what is your second ban?">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="notes-container">
+                <div id="notes-title-container">
+                    <div id="notes-title-text">~ Notes ~</div>
+                </div>
+                <div id="notes-list-container">
+                    <div class="notes-text-container">
+                        <div class="notes-text">Ask warm ups, rolls, bans, picks, anounce winner, ask for tiebreaker if
+                            applicable</div>
+                    </div>
+                    <div class="notes-text-container">
+                        <div class="notes-text">Get mp url!!!!!!!!!!</div>
+                    </div>
+                    <div class="notes-text-container">
+                        <div class="notes-text">Do "!mp close" before leaving</div>
+                    </div>
+                    <div class="notes-text-container">
+                        <div class="notes-text">Add whoever is hosting the tourney client as a referee</div>
+                    </div>
+                    <div class="notes-text-container">
+                        <div class="notes-text">mp commands <a
+                                href="https://osu.ppy.sh/wiki/en/osu%21_tournament_client/osu%21tourney/Tournament_management_commands?msclkid=b642ba85b7de11ec866cecde3ddf5ea0">here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="wrapper">
-        <div id="output-values">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div id="reminders">
-            <div class="title">
-                <span>~ Reminders ~</span>
-            </div>
-            <div class="reminder">
-                <span>Order: Ask warm ups, Rolls, Bans, Picks, Announce winner, Ask for tiebreaker</span>
-            </div>
-            <div class="reminder">
-                <span>Get MP Link!!!!!!!!!!</span>
-            </div>
-            <div class="reminder">
-                <span>Use "!mp close" before leaving</span>
-            </div>
-            <div class="reminder">
-                <span>Add whoever is hosting the tourney client as a ref</span>
-            </div>
-        </div>
-    </div>
+
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
