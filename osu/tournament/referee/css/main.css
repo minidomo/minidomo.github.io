@@ -22,12 +22,13 @@ a {
 #main-wrapper {
     display: flow-root;
     box-sizing: border-box;
-    padding: 20px 0 20px 0;
+    padding: 20px 20px 20px 20px;
 }
 
 #main {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
     gap: 50px;
 }
 
@@ -80,11 +81,16 @@ a {
     flex-flow: column;
     align-items: center;
     gap: 10px;
+    width: 550px;
 }
 
 #notes-list-container {
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
+}
+
+.notes-text::before {
+    content: '- ';
 }
